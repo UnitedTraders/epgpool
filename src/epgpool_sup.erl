@@ -20,7 +20,7 @@ init([]) ->
         {size, PoolSize + 1}
     ],
     {ok, {{rest_for_one, 1000, 1}, [
-        ?CHILD(epgpool_conn_sup, worker, []),
+        ?CHILD(epgpool_conn_sup, supervisor, []),
         ?CHILD(epgpool_alive, worker, [Opts]),
         ?CHILD(poolboy, worker, [Opts])
     ]}}.
