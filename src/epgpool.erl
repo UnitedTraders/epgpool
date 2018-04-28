@@ -114,7 +114,7 @@ call(Worker, Fun) ->
 
 -spec kill_all_workers() -> ok.
 kill_all_workers() ->
-    Workers = gen_server:call(epgpool_sup, get_all_workers),
+    Workers = supervisor:which_children(epgpool_sup),
     _ = [ epgpool_worker:kill(Pid) || {_, Pid, worker, _} <- Workers ],
     ok.
 
