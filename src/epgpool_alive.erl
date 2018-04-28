@@ -65,7 +65,7 @@ handle_info(timeout, #state{connection=undefined}=State) ->
     handle_info(init, State);
 handle_info(timeout, #state{connection=C, fails=Fails}=State) ->
     try
-        {ok, [], []} = epgsql:squery(C, "SELECT 1;"),
+        {ok, _, _} = epgsql:squery(C, "SELECT 1;"),
         {noreply, State#state{fails=0, status=alive}, timeout()}
     catch _:_ ->
         true = exit(C, kill),
